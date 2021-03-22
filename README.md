@@ -1,6 +1,6 @@
 # DeltaTrader
 
- ![py36][py36] ![version][version]
+ ![py37][py37] ![version][version]
 
 DeltaTrader是一个开源的量化交易接口，实现自动交易从未那么简单。
 
@@ -52,6 +52,6 @@ st.export_data(data=data, filename='000001.XSHE', type='price')
 如果有什么问题或者建议都可以在[这里][issue#1]和我讨论
 
 [version]: https://img.shields.io/badge/version-1.0-purpleviolet.svg
-[py36]: https://img.shields.io/badge/python-3.6-red.svg
+[py37]: https://img.shields.io/badge/python-3.7-red.svg
 [deltaf]: https://github.com/Delta-F
 [issue#1]: https://github.com/Delta-F/DeltaTrader/issues/1
