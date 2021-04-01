@@ -10,6 +10,11 @@
 
 import data.stock as st
 
+# 本地读取数据
+data = st.get_csv_price('000002.XSHE', '2020-01-01', '2020-02-01')
+print(data)
+exit()  # 终端程序
+
 # 获取平安银行的行情数据（日K）
 data = st.get_single_price('000001.XSHE', 'daily', '2020-01-01', '2020-02-01')
 # print(data)

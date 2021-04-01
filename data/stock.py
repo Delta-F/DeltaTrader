@@ -14,7 +14,7 @@ import pandas as pd
 import datetime
 import os
 
-auth('17621171968', '171968')  # 账号是申请时所填写的手机号
+auth('username', 'password')  # 账号是申请时所填写的手机号
 # 设置行列不忽略
 pd.set_option('display.max_rows', 100000)
 pd.set_option('display.max_columns', 1000)
@@ -92,9 +92,22 @@ def export_data(data, filename, type, mode=None):
     print('已成功存储至：', file_root)
 
 
-def get_csv_data(code, type):
-    file_root = data_root + type + '/' + code + '.csv'
-    return pd.read_csv(file_root)
+def get_csv_price(code, start_date, end_date):
+    """
+    获取本地数据，且顺便完成数据更新工作
+    :param code: str,股票代码
+    :param start_date: str,起始日期
+    :param end_date: str,起始日期
+    :return: dataframe
+    """
+    # 使用update直接更新
+    update_daily_price(code)
+    # 读取数据
+    file_root = data_root + 'price/' + code + '.csv'
+    data = pd.read_csv(file_root, index_col='date')
+    # print(data)
+    # 根据日期筛选股票数据
+    return data[(data.index >= start_date) & (data.index <= end_date)]
 
 
 def transfer_price_freq(data, time_freq):
@@ -148,7 +161,7 @@ def calculate_change_pct(data):
     return data
 
 
-def update_daily_price(stock_code, type):
+def update_daily_price(stock_code, type='price'):
     # 3.1是否存在文件：不存在-重新获取，存在->3.2
     file_root = data_root + type + '/' + stock_code + '.csv'
     if os.path.exists(file_root):  # 如果存在对应文件
@@ -162,7 +175,12 @@ def update_daily_price(stock_code, type):
         df = get_single_price(stock_code, 'daily')
         export_data(df, stock_code, 'price')
 
+    print("股票数据已经更新成功：", stock_code)
+
 
 if __name__ == '__main__':
-    data = get_fundamentals(query(indicator), statDate='2020')  # 获取财务指标数据
-    print(data)
+    # data = get_fundamentals(query(indicator), statDate='2020')  # 获取财务指标数据
+    # print(data)
+
+    df = get_fundamentals(query(valuation), date='2021-03-24')
+    print(df)
