@@ -14,7 +14,7 @@ import pandas as pd
 import datetime
 import os
 
-auth('username', 'password')  # 账号是申请时所填写的手机号
+auth('', '')  # 账号是申请时所填写的手机号
 # 设置行列不忽略
 pd.set_option('display.max_rows', 100000)
 pd.set_option('display.max_columns', 1000)
@@ -47,6 +47,16 @@ def get_stock_list():
     """
     stock_list = list(get_all_securities(['stock']).index)
     return stock_list
+
+
+def get_index_list(index_symbol='000300.XSHG'):
+    """
+    获取指数成分股，指数代码查询：https://www.joinquant.com/indexData
+    :param index_symbol: 指数的代码，默认沪深300
+    :return: list，成分股代码
+    """
+    stocks = get_index_stocks(index_symbol)
+    return stocks
 
 
 def get_single_price(code, time_freq, start_date=None, end_date=None):
@@ -92,19 +102,23 @@ def export_data(data, filename, type, mode=None):
     print('已成功存储至：', file_root)
 
 
-def get_csv_price(code, start_date, end_date):
+def get_csv_price(code, start_date, end_date, columns=None):
     """
     获取本地数据，且顺便完成数据更新工作
     :param code: str,股票代码
     :param start_date: str,起始日期
     :param end_date: str,起始日期
+    :param columns: list,选取的字段
     :return: dataframe
     """
     # 使用update直接更新
     update_daily_price(code)
     # 读取数据
     file_root = data_root + 'price/' + code + '.csv'
-    data = pd.read_csv(file_root, index_col='date')
+    if columns is None:
+        data = pd.read_csv(file_root, index_col='date')
+    else:
+        data = pd.read_csv(file_root, usecols=columns, index_col='date')
     # print(data)
     # 根据日期筛选股票数据
     return data[(data.index >= start_date) & (data.index <= end_date)]
@@ -182,5 +196,9 @@ if __name__ == '__main__':
     # data = get_fundamentals(query(indicator), statDate='2020')  # 获取财务指标数据
     # print(data)
 
-    df = get_fundamentals(query(valuation), date='2021-03-24')
-    print(df)
+    # df = get_fundamentals(query(valuation), date='2021-03-24')
+    # print(df)
+
+    # 5.3获取沪深300指数成分股代码
+    print(get_index_list())
+    print(len(get_index_list()))
