@@ -14,7 +14,7 @@ import pandas as pd
 import datetime
 import os
 
-auth('', '')  # 账号是申请时所填写的手机号
+auth(' ', ' ')  # 账号是申请时所填写的手机号
 # 设置行列不忽略
 pd.set_option('display.max_rows', 100000)
 pd.set_option('display.max_columns', 1000)
