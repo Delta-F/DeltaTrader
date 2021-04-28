@@ -41,7 +41,7 @@ st.export_data(data=data, filename='000001.XSHE', type='price')
 - 策略模型
 - 自动化交易
 
-## 作以及者
+## 参与作者
 
 - [deltaf][deltaf]: 构架及维护Python3版本
 - ACE：实时爬取财经网站股票行情数据
