@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-#
 """
 @File    :   upgrade.py    
-@Contact :   gopheriilidan@yeah.net
 @Author  :   Ace
 @Description: 
 @Modify Time      @Version    @Desciption
