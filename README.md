@@ -37,15 +37,16 @@ st.export_data(data=data, filename='000001.XSHE', type='price')
 
 ## 功能模块
 
-- 行情数据
+- 行情数据：目前提供2中数据源获取方式（JQData数据接口、财经网站爬虫）
 - 策略模型
 - 自动化交易
 
-## 作者
+## 参与作者
 
-[deltaf][deltaf]: 构架及维护Python3版本
+- [deltaf][deltaf]: 构架及维护Python3版本
+- ACE：实时爬取财经网站股票行情数据
 
-待添加……
+（待添加）
 
 ## 问题和建议
 
