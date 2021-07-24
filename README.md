@@ -2,10 +2,12 @@
 
  ![py37][py37] ![version][version]
 
-DeltaTrader，致力于打造一个极简好用的程序化交易框架，便于个人投资者优化自己的交易系统。主要包含4大功能：获取行情数据（data）、创建交易策略（strategy）、计算评估指标并完成回测（backtest），以及模拟实盘交易（trader）的部分。
+DeltaTrader，致力于打造一个极简好用的程序化交易框架，便于个人投资者优化自己的交易系统。
+
+主要包含4大功能：获取行情数据（data）、创建交易策略（strategy）、计算评估指标并完成回测（backtest），以及模拟实盘交易（trader）的部分。
  
-必看教程：https://coding.imooc.com/class/494.html
-开源代码：https://github.com/Delta-F/DeltaTrader
+* 必看教程：https://coding.imooc.com/class/494.html
+* 开源代码：https://github.com/Delta-F/DeltaTrader
 
 ## 合作招募
 
