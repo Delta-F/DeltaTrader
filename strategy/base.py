@@ -67,9 +67,21 @@ def calculate_prof_pct(data):
     计算单次收益率：开仓、平仓（开仓的全部股数）
     :param data:
     :return:
+    关于修改计算信号不为0的涨跌幅的解释：
+    原代码:
+    data.loc[data['signal'] != 0, 'profit_pct'] = data['close'].pct_change()
+    把没有买卖时的收益率也算上了,因此收益率profit_pct只是相比上一天的close比率
+    这样是不对的，按照该策略(周四买，周一卖)，应该只计算周四买到周一卖时，这个时间
+    段的收益率，即-1、1时的收益率，老师原本的才是正确的,即：
+    data = data[data['signal'] != 0]    # data这里已经被筛选成-1，1的close了
+    data['profit_pct'] = data['close'].pct_change()
+    那个同学的是错的,之后老师改成了错的。
+    老师改成错误的原因，是老师证明那个同学的代码时，证明的时候使用了错误的证明:
+    老师把calculate_prof_pct和calculate_prof_pct2连着
+    放在一起论证，导致了最终结果一致（详细见课程里3-6debug）
     """
     # 筛选信号不为0的，并且计算涨跌幅
-    data.loc[data['signal'] != 0, 'profit_pct'] = data['close'].pct_change()
+    data['profit_pct'] = data.loc[data['signal'] != 0, 'close'].pct_change()
     data = data[data['signal'] == -1]  # 筛选平仓后的数据：单次收益
     return data
 
